@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sl-objectstorage.build" default="makejar" basedir=".">
+	<target name="clean">
+		    <delete file="build/*.*"/>
+	        <delete file="bin/*.*"/>
+	    </target>
+	<target name="compile" description="compile src" depends="clean">
+		<path id="classpath">
+
+			<fileset dir="lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		<javac destdir="bin">
+			<src path="src" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	<target name="makejar" description="create jar" depends="compile">
+		<jar jarfile="build/sl-objectstorage.jar" basedir="bin" />
+	</target>
+	
+</project>
