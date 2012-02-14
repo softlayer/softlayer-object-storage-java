@@ -61,7 +61,7 @@ public class UnitTest extends TestCase {
 
 		baseUrl = "http://dal05.objectstorage.service.networklayer.com";
 		user = "<your user here>";
-		password = "<your password here>";
+		password = "<your password here>"; 
 	}
 
 	public static junit.framework.Test suite() {
