@@ -67,6 +67,7 @@ public class Client {
 	static final String X_OBJECT_META = "X-Object-Meta-";
 	static final String X_CDN_MANAGEMENT_URL = "X-CDN-Management-URL";
 	static final String X_CONTENT = "X-Content";
+	static final String X_CONTEXT = "X-Context";
 	static final String X_CDN_URL = "X-cdn-url";
 	static final String X_CDN_SSL_URL = "X-cdn-ssl-url";
 	static final String X_CDN_STREAM_HTTP_URL = "X-cdn-stream-http-url";

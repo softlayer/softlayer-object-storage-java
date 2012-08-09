@@ -185,7 +185,7 @@ public class Account extends Client {
 			boolean recursive) throws IOException {
 
 		Hashtable<String, String> params = super.createAuthParams();
-		params.put(X_CONTENT, "search");
+		params.put(X_CONTEXT, "search");
 		String url = super.storageurl
 				+ super.makeSearchUrl(query, limit, start, field, type, format,
 						marker, recursive);
