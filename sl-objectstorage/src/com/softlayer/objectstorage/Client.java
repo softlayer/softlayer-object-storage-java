@@ -45,7 +45,7 @@ import org.restlet.resource.ClientResource;
  * other dealings in this Software without prior written authorization from
  * SoftLayer Technologies, Inc.
  * 
- * Portions Copyright © 2008-9 Rackspace US, Inc.
+ * Portions Copyright ï¿½ 2008-9 Rackspace US, Inc.
  * 
  * 
  * base client for making calls to objectstorage API
@@ -429,9 +429,6 @@ public class Client {
 		}
 		int length = name.length();
 		if (length == 0 || length > 256) {
-			return false;
-		}
-		if (name.indexOf('/') != -1) {
 			return false;
 		}
 		return true;

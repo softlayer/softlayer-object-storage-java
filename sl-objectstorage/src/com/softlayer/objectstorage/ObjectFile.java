@@ -1,10 +1,6 @@
 package com.softlayer.objectstorage;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -46,7 +42,7 @@ import org.restlet.resource.ClientResource;
  * other dealings in this Software without prior written authorization from
  * SoftLayer Technologies, Inc.
  * 
- * Portions Copyright © 2008-9 Rackspace US, Inc.
+ * Portions Copyright ï¿½ 2008-9 Rackspace US, Inc.
  * 
  * This represents a file object on the objectstorage server
  * 
@@ -171,6 +167,44 @@ public class ObjectFile extends Client {
 			String fName = super.saferUrlEncode(this.name);
 			Representation representation = new InputRepresentation(
 					new ByteArrayInputStream(bytes), MediaType.ALL);
+			ClientResource client = super.put(params, representation,
+					super.storageurl + "/" + uName + "/" + fName);
+			this.headers = client.getResponseAttributes();
+			Form head = (Form) this.headers.get("org.restlet.http.headers");
+			return head.getFirstValue("Etag");
+		} else {
+			throw new EncoderException("invalid file name");
+		}
+
+	}
+
+	/**
+	 * upload this file from a local file copy to the objectstorage server
+	 *
+	 * @param inputStream
+	 *            stream of input data from file
+	 * @param tags
+	 *            Map of tags to attach to this file
+	 * @return etag value of this upload
+	 * @throws EncoderException
+	 * @throws IOException
+	 */
+	public String uploadFile(InputStream inputStream, Map<String, String> tags)
+			throws EncoderException, IOException {
+		if (super.isValidName(this.name)) {
+			Hashtable<String, String> params = super.createAuthParams();
+			Iterator<Map.Entry<String, String>> it = tags.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<String, String> pairs = (Map.Entry<String, String>) it
+						.next();
+				params.put(Client.X_OBJECT_META + pairs.getKey(),
+						pairs.getValue());
+				it.remove();
+			}
+
+			String uName = super.saferUrlEncode(this.containerName);
+			String fName = super.saferUrlEncode(this.name);
+			Representation representation = new InputRepresentation(inputStream, MediaType.ALL);
 			ClientResource client = super.put(params, representation,
 					super.storageurl + "/" + uName + "/" + fName);
 			this.headers = client.getResponseAttributes();
