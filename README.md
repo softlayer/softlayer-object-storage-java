@@ -1,6 +1,10 @@
 # Softlayer Object Storage Java Client
 This client is a simple binding for accessing the Softlayer Object Storage API.  It should serve as an example for interacting with the REST API in Java.
 
+## <font color="red">Deprecated</font>
+
+This repository has been deprecated, as the product it supports is also deprecated. For now it will be archived, but may be deleted at some point in the future.
+
 ## Java Version
 Current works with Java 1.6 +
 
